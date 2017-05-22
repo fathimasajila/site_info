@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * To alter system information page.
+ */
+ 
+/**
+ * Implements hook_form_FORM_ID_alter.
+ */
+function site_info_form_system_site_information_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  
+  //Get site api key from system varable.
+  $siteApiKey = \Drupal::config('site_info.settings')->get('siteapikey');
+  
+  $form['site_api_key'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Site API Key'),
+    '#size' => 40,
+    '#default_value' => ($siteApiKey) ? $siteApiKey : t('No API Key yet'),
+    '#description' => t('The value entered for this field saved as system variable.'),
+   );
+   
+   // Change value of submit button.
+   $form['actions']['submit']['#value'] = 'Update Configuration';
+   $form['actions']['submit']['#submit'][] = 'site_info_form_system_site_information_settings_submit';
+ 
+}
+
+/**
+ * Custom submit handler for site information form.
+ */
+function site_info_form_system_site_information_settings_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  
+  // Store site api key into the system variable.
+  \Drupal::configFactory()->getEditable('site_info.settings')
+    ->set('siteapikey', $form_state->getValue('site_api_key'))
+    ->save();
+    
+   drupal_set_message(t('Site API Key has been saved with %siteApiKey', 
+     array('%siteApiKey' => \Drupal::config('site_info.settings')->get('siteapikey'))), 'status', TRUE);
+}

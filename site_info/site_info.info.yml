@@ -1,0 +1,6 @@
+name: Site Info
+type: module
+description: 'This module alter the existing Drupal "Site Information" form.'
+package: Custom
+core: 8.x
+
