@@ -1,0 +1,7 @@
+site_info_api.get_json_request:
+  path: '/json-data/{nid}'
+  defaults:
+    _controller: '\Drupal\site_info_api\Controller\SiteInfoAPIController::getJsonData'
+    _title: 'Get json data'
+  requirements:
+    _permission: 'access content'

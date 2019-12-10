@@ -1,0 +1,5 @@
+name: Site Info API
+type: module
+description: 'Integrate the API with "Site Information" form.'
+package: Custom
+core: 8.x
