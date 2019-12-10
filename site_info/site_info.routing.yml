@@ -1,7 +1,0 @@
-site_info.get_json_request:
-  path: '/api/{nid}'
-  defaults:
-    _controller: '\Drupal\site_info\Controller\WebserviceController::siteInfoGenerateJsonValues'
-    _title: 'Get json of page content type'
-  requirements:
-    _permission: 'access content'
